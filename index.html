@@ -9,58 +9,44 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>PistachioLog - Orchard Management</title>
     
-    <!-- PWA Manifest & Icons - Prioritized for Scanners -->
+    <!-- PWA Manifest & Icons -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/427/427112.png" />
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/427/427112.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Babel for compiling React/TSX in browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <style>
       body {
         font-family: 'Inter', sans-serif;
-        /* Topographic pattern for desktop background */
         background-color: #e0e7ff;
         background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23059669' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         margin: 0;
         padding: 0;
         overscroll-behavior-y: none;
       }
-      /* Hide scrollbar for cleaner mobile look */
-      ::-webkit-scrollbar {
-        display: none;
-      }
-      * {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        -webkit-tap-highlight-color: transparent;
-      }
-      
-      /* Safe area utilities for iPhone X+ */
-      .safe-top {
-        padding-top: env(safe-area-inset-top);
-      }
-      .safe-bottom {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      .pb-safe {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      
-      /* Smooth gradients */
-      .bg-gradient-orchard {
-        background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-      }
+      ::-webkit-scrollbar { display: none; }
+      * { -ms-overflow-style: none; scrollbar-width: none; -webkit-tap-highlight-color: transparent; }
+      .safe-top { padding-top: env(safe-area-inset-top); }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+      .bg-gradient-orchard { background: linear-gradient(135deg, #065f46 0%, #047857 100%); }
     </style>
-  <script type="importmap">
+    
+    <script type="importmap">
 {
   "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "recharts": "https://esm.sh/recharts@2.12.0?external=react,react-dom",
+    "lucide-react": "https://esm.sh/lucide-react@0.330.0?external=react",
+    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
 }
 </script>
@@ -69,17 +55,16 @@
   <body>
     <div id="root"></div>
     
-    <!-- Service Worker Registration directly in HTML for better PWA detection -->
+    <!-- Load the App Entry Point with Babel -->
+    <script type="text/babel" data-type="module" src="./index.tsx"></script>
+
+    <!-- Service Worker Registration -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('sw.js')
-            .then((registration) => {
-              console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            })
-            .catch((err) => {
-              console.log('ServiceWorker registration failed: ', err);
-            });
+            .then((registration) => console.log('SW registered:', registration.scope))
+            .catch((err) => console.log('SW failed:', err));
         });
       }
     </script>
