@@ -1,0 +1,28 @@
+
+{
+  "id": "/?pistachiolog",
+  "name": "PistachioLog Orchard Manager",
+  "short_name": "PistachioLog",
+  "description": "Professional pistachio orchard management and tracking tool.",
+  "start_url": "./index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#065f46",
+  "orientation": "portrait",
+  "categories": ["productivity", "agriculture"],
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/427/427112.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/427/427112.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

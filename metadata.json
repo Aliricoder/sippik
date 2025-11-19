@@ -1,0 +1,5 @@
+{
+  "name": "PistachioLog",
+  "description": "A comprehensive day-by-day orchard management tool for tracking irrigation, fertilization, spraying, and other field activities. Features AI-driven insights for orchard health.",
+  "requestFramePermissions": []
+}
